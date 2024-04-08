@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: main-page-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/main-page
+
+server:
+  port: 8091
+

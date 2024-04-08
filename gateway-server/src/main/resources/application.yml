@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+
+
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: main-page-service
+          uri: http://127.0.0.1:8091
+          predicates:
+            - Path=/main-page/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  management:
+#    endpoint:
+#      gateway:
+#        enabled: true # default value
+#    endpoints:
+#      web:
+#        exposure:
+#          include: gateway
+
+
