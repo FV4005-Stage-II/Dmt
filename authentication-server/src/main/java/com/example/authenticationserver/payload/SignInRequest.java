@@ -12,6 +12,6 @@ public class SignInRequest {
     String username;
 
     @NotBlank
-    @Size(min = 8, max = 20)
+    @Size(min = 6, max = 20)
     String password;
 }

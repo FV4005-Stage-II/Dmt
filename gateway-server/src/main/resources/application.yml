@@ -13,21 +13,13 @@ spring:
           uri: http://127.0.0.1:8091
           predicates:
             - Path=/main-page/**
+          filters:
+            - AuthenticationFilter
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        - id: authentication-server
+          uri: http://127.0.0.1:8090
+          predicates:
+            - Path=/**
 
 
 
@@ -41,4 +33,10 @@ spring:
 #        exposure:
 #          include: gateway
 
+jwt:
+  uri: /auth/**
+  header: Authorization
+  prefix: Bearer
+  expiration: 86400
+  secret: JwtSecretKey
 

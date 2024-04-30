@@ -37,29 +37,29 @@ public class User {
     }
 
     @Id
-    private String id;
+    protected String id;
 
     @NotBlank
     @Size(max = 15)
-    private String username;
+    protected String username;
 
     @NotBlank
     @Size(max = 100)
     @JsonIgnore
-    private String password;
+    protected String password;
 
     @NotBlank
     @Size(max = 40)
     @Email
-    private String email;
+    protected String email;
 
     @CreatedDate
-    private Instant createdAt;
+    protected Instant createdAt;
 
     @LastModifiedDate
-    private Instant updatedAt;
+    protected Instant updatedAt;
 
-    private boolean active;
-    private Profile userProfile;
-    private Set<Role> roles;
+    protected boolean active;
+    protected Profile userProfile;
+    protected Set<Role> roles;
 }

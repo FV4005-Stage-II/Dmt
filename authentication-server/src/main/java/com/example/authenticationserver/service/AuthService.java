@@ -4,10 +4,8 @@ package com.example.authenticationserver.service;
 import com.example.authenticationserver.model.User;
 import com.example.authenticationserver.payload.SignUpRequest;
 import com.example.authenticationserver.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -45,6 +43,7 @@ public class AuthService {
     public String signIn(String username, String password) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        log.info("AuthService");
         return jwtService.generateToken(authentication);
     }
 

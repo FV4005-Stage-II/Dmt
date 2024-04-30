@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<?> signIn(@Valid SignInRequest signInRequest) {
+    public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequest signInRequest) {
         String token = authService.signIn(signInRequest.getUsername(), signInRequest.getPassword());
         return ResponseEntity.ok(token);
     }
@@ -39,10 +39,10 @@ public class AuthController {
     public ResponseEntity<?> validateToken(@RequestBody String token) {
         return new ResponseEntity<>(jwtService.validateToken(token), HttpStatus.OK);
     }
-    @GetMapping("/get-token")
-    public ResponseEntity<?> getToken(User user) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @GetMapping("/get-token")
+//    public ResponseEntity<?> getToken(User user) {
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 //    доделать все запросы на контроллеры и доделать конфиги с безопасностью,
 //    потом допилить полное объединение двух проектов и шлюз протестить
