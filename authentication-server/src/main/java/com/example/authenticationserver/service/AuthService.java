@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -36,14 +35,14 @@ public class AuthService {
                         .password(passwordEncoder.encode(signUpRequest.getPassword()))
                         .build()
         );
-        log.info("user is registered");
+//        log.info("user is registered");
         return "user is registered";
     }
 
     public String signIn(String username, String password) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        log.info("AuthService");
+//        log.info("AuthService");
         return jwtService.generateToken(authentication);
     }
 

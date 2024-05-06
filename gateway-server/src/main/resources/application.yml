@@ -33,10 +33,11 @@ spring:
 #        exposure:
 #          include: gateway
 
-jwt:
-  uri: /auth/**
-  header: Authorization
-  prefix: Bearer
-  expiration: 86400
-  secret: JwtSecretKey
+security:
+  jwt:
+    uri: /auth/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: JwtSecretKey
 

@@ -21,17 +21,17 @@ public class UserService {
 
 
     public List<User> findAll() {
-        log.info("retrieving all users");
+//        log.info("retrieving all users");
         return userRepository.findAll();
     }
 
     public Optional<User> findByUsername(String username) {
-        log.info("retrieving user {}", username);
+//        log.info("retrieving user {}", username);
         return userRepository.findByUsername(username);
     }
 
     public Optional<User> findById(String id) {
-        log.info("retrieving user {}", id);
+//        log.info("retrieving user {}", id);
         return userRepository.findById(id);
     }
 }

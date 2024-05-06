@@ -32,8 +32,8 @@ public class User {
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
         this.active = user.active;
-        this.userProfile = user.userProfile;
-        this.roles = user.roles;
+//        this.userProfile = user.userProfile;
+//        this.roles = user.roles;
     }
 
     @Id
@@ -60,6 +60,6 @@ public class User {
     protected Instant updatedAt;
 
     protected boolean active;
-    protected Profile userProfile;
-    protected Set<Role> roles;
+//    protected Profile userProfile;
+//    protected Set<Role> roles;
 }

@@ -1,12 +1,9 @@
 package com.example.authenticationserver.model;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CustomUserDetails extends User implements UserDetails {
 
@@ -14,18 +11,23 @@ public class CustomUserDetails extends User implements UserDetails {
         super(user);
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//
+//        return getRoles()
+//                .stream()
+//                .map(role -> new SimpleGrantedAuthority("ROLE_" +role.getName()))
+//                .collect(Collectors.toSet());
+//    }
+
+//    @Override
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return getRoles()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" +role.getName()))
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public Set<Role> getRoles() {
-        return roles;
+        return null;
     }
 
     @Override

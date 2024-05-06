@@ -12,23 +12,12 @@ public class JwtService {
 
     private final JwtConfig jwtConfig;
 
-
-
-
-    public Claims getClaimsFromJWT(String token) {
-        return Jwts.parser()
-                .setSigningKey(jwtConfig.getSecret().getBytes())
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser()
                     .setSigningKey(jwtConfig.getSecret().getBytes())
                     .parseClaimsJws(authToken);
-
+            log.info("Valid JWT token");
             return true;
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");

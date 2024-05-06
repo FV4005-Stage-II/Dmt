@@ -16,9 +16,8 @@ public class MainPageController {
 
     final private MainPageService mainPageService;
 
-
-    @GetMapping("/{username}")
-    ResponseEntity<?> getMainPage(@PathVariable String username) {
+    @GetMapping()
+    ResponseEntity<?> getMainPage(@RequestParam String username) {
         return new ResponseEntity<>(mainPageService.findByUsername(username), HttpStatus.OK);
     }
 }

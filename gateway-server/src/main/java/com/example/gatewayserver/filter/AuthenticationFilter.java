@@ -4,20 +4,26 @@ package com.example.gatewayserver.filter;
 
 import com.example.gatewayserver.jwt.JwtService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Mono;
+
+
 
 @Component
 @Slf4j
 @AllArgsConstructor
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
-
+    @Autowired
     private RouteValidator routeValidator;
+    @Autowired
     private JwtService jwtService;
 
     public AuthenticationFilter() {
@@ -26,31 +32,23 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
-        return ((exchange, chain) -> {
-            log.info("the filter worked");
-            if (routeValidator.isSecured.test(exchange.getRequest())) {
-                //header contains token or not
-                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-                    throw new RuntimeException("missing authorization header");
-                }
-                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0); // распарсить
-                if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                    authHeader = authHeader.substring(7);
-                }
-                try {
-//                    //REST call to AUTH service
-//                    template.getForObject("http://IDENTITY-SERVICE//validate?token" + authHeader, String.class);
-                    jwtService.validateToken(authHeader);
+        return (exchange, chain) -> {
+            String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-                } catch (Exception e) {
-                    log.info("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String token = authHeader.substring(7);
+
+                if (jwtService.validateToken(token)) {
+                    return chain.filter(exchange); // Продолжаем выполнение цепочки фильтров
+                } else {
+                    return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid JWT token"));
                 }
+            } else {
+                log.warn("No valid JWT token found in Authorization header");
+                return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No valid JWT token found"));
             }
-            return chain.filter(exchange);
-        });
+        };
     }
-
 
     public static class Config {
 
