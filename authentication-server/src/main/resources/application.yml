@@ -4,7 +4,29 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/main-page
-
+#  security:
+#    cors:
+#      corsFilter:
+#        allowed-origins:
+#          - "http://localhost:3000"
+#        allowed-methods:
+#          - GET
+#          - POST
+#          - PUT
+#          - DELETE
+#          - OPTIONS
+#        allowed-headers:
+#          - Content-Type
+#          - Authorization
+#        allow-credentials: true
+#  mvc:
+#    cors:
+#      mappings:
+#        '/**':
+#          allowed-origin-patterns: "http://localhost:3000"
+#          allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+##          allowed-headers: "*"
+#          allow-credentials: true
 server:
   port: 8090
 

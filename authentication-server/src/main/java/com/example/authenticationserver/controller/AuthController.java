@@ -1,6 +1,5 @@
 package com.example.authenticationserver.controller;
 
-
 import com.example.authenticationserver.payload.SignInRequest;
 import com.example.authenticationserver.payload.SignUpRequest;
 import com.example.authenticationserver.service.AuthService;
@@ -19,13 +18,16 @@ public class AuthController {
     final private AuthService authService;
     final private JwtService jwtService;
 
+
     @PostMapping("/sign-up")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+        log.info("sign-up");
         return ResponseEntity.ok(authService.registerUser(signUpRequest));
     }
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequest signInRequest) {
+        log.info("sign-in");
         String token = authService.signIn(signInRequest.getUsername(), signInRequest.getPassword());
         return ResponseEntity.ok(token);
     }

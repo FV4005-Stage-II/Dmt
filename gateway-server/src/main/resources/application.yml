@@ -1,13 +1,26 @@
 server:
   port: 8080
 
-
-
 spring:
   application:
     name: gateway-server
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
       routes:
         - id: main-page-service
           uri: http://127.0.0.1:8091
@@ -20,9 +33,15 @@ spring:
           uri: http://127.0.0.1:8090
           predicates:
             - Path=/**
-
-
-
+#          metadata:
+#            cors:
+#              allowedOrigins: '*'
+#              allowedMethods:
+#                - GET
+#                - POST
+#              allowedHeaders: '*'
+#              allowCredentials: false
+#              maxAge: 30
 
 #  management:
 #    endpoint:
