@@ -42,7 +42,7 @@ public class AuthService {
     public String signIn(String username, String password) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//        log.info("AuthService");
+        log.info("AuthService");
         return jwtService.generateToken(authentication);
     }
 

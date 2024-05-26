@@ -33,6 +33,14 @@ spring:
           uri: http://127.0.0.1:8090
           predicates:
             - Path=/**
+
+        - id: chat-service
+          uri: http://127.0.0.1:8092
+          predicates:
+            - Path=/**
+#            - Path=/ws/**
+          filters:
+            - AuthenticationFilter
 #          metadata:
 #            cors:
 #              allowedOrigins: '*'

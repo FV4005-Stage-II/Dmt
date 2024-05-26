@@ -4,6 +4,7 @@ import com.example.chatservice.model.ChatMessage;
 import com.example.chatservice.model.ChatNotification;
 import com.example.chatservice.service.ChatMessageService;
 import com.example.chatservice.service.ChatRoomService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
+@Slf4j
 public class ChatController {
 
     @Autowired
@@ -40,7 +42,7 @@ public class ChatController {
     public ResponseEntity<Long> countNewMessages(
             @PathVariable String senderId,
             @PathVariable String recipientId) {
-
+        log.info("countNewMessages");
         return ResponseEntity
                 .ok(chatMessageService.countNewMessages(senderId, recipientId));
     }
@@ -48,13 +50,21 @@ public class ChatController {
     @GetMapping("/messages/{senderId}/{recipientId}")
     public ResponseEntity<?> findChatMessages ( @PathVariable String senderId,
                                                 @PathVariable String recipientId) {
+        log.info("findChatMessages");
         return ResponseEntity
                 .ok(chatMessageService.findChatMessages(senderId, recipientId));
     }
 
     @GetMapping("/messages/{id}")
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
+        log.info("findMessage");
         return ResponseEntity
                 .ok(chatMessageService.findById(id));
+    }
+    @GetMapping("/test")
+    public ResponseEntity<?> test () {
+        log.info("test");
+        return ResponseEntity
+                .ok("test");
     }
 }

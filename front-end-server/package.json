@@ -16,10 +16,9 @@
     "react-scroll-to-bottom": "^4.2.0",
     "react-stomp": "^5.0.0",
     "recoil": "0.7.6",
+    "recoil-persist": "^5.1.0",
     "sockjs-client": "^1.4.0"
   },
-
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -5,7 +5,6 @@ import com.example.authenticationserver.model.User;
 import com.example.authenticationserver.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class UserService {
 
     final private UserRepository userRepository;
-    final private PasswordEncoder passwordEncoder;
+//    final private PasswordEncoder passwordEncoder;
 
 
     public List<User> findAll() {

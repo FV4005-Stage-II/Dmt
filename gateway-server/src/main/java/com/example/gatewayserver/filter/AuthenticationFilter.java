@@ -34,11 +34,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            log.info("filter gateway worked");
 
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 String token = authHeader.substring(7);
 
                 if (jwtService.validateToken(token)) {
+                    log.info("filter gateway worked VALID TOKEN TOGOROT");
                     return chain.filter(exchange); // Продолжаем выполнение цепочки фильтров
                 } else {
                     return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid JWT token"));

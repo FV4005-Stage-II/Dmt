@@ -7,16 +7,14 @@ import {
 // import { login } from "../util/ApiUtil";
 // import {login} from "../../util/"
 import "./Signin.css";
-import { login } from "../api/Authentication";
+import { login } from "../api/AuthenticationApi";
 
 const SignIn = (props) => {
     const [loading, setLoading] = useState(false);
     
-    const [test, setTest] = useState(localStorage.getItem("accessToken"));
-    
     useEffect(() => {
       if (localStorage.getItem("accessToken") !== null) {
-        props.history.push("/");
+        props.history.push("/profile");
       }
       }, []);
     
@@ -25,13 +23,13 @@ const SignIn = (props) => {
         setLoading(true);
         login(values)
           .then((response) => {
-            console.log(response)
             localStorage.setItem("accessToken", response.accessToken);
-            props.history.push("/chat");
+            props.history.push("/profile");
             setLoading(false);
           })
           .catch((error) => {
             if (error.status === 401) {
+              console.log("401")
               notification.error({
                 message: "Error",
                 description: "Username or Password is incorrect. Please try again!",

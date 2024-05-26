@@ -8,12 +8,14 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
+    private String userId;
     private String username;
     private String password;
 
     public CustomUserDetails(User userCredential) {
         this.username = userCredential.getUsername();
         this.password = userCredential.getPassword();
+        this.userId = userCredential.getId();
     }
 
     @Override
@@ -49,5 +51,9 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

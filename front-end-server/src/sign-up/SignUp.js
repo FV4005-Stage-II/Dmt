@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Radio, DatePicker, notification } from "antd";
 import moment from 'moment';
-// import { signup } from "../api/Authentication";
 import "./Signup.css";
-import { register } from "../api/Authentication";
+import { register } from "../api/AuthenticationApi";
 
 
 const SignUp = (props) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      // if (localStorage.getItem("accessToken") !== null) {
-      //   props.history.push("/");
-      // }
+      if (localStorage.getItem("accessToken") !== null) {
+        props.history.push("/profile");
+      }
     }, []);
   
     const onFinish = (values) => {
       const dateOfBirth = values.dateOfBirth.format('YYYY-MM-DD');
       const dataToSend = { ...values, dateOfBirth};
-      console.log(dataToSend);
       setLoading(true);
       register(dataToSend)
         .then((response) => {
@@ -27,14 +25,14 @@ const SignUp = (props) => {
             description:
               "Thank you! You're successfully registered. Please Login to continue!",
           });
-          props.history.push("/login");
+          props.history.push("/sign-in");
           setLoading(false);
         })
         .catch((error) => { 
           notification.error({
             message: "Error",
             description:
-              error.message || "Sorry! Something went wrong. Please try again!",
+              /*error.message ||*/  "Sorry! Something went wrong. Please try again!",
           });
           setLoading(false);
         });

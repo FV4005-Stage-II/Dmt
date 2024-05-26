@@ -21,36 +21,33 @@ public class JwtService {
 
     private final JwtConfig jwtConfig;
 
-
-
     public String generateToken(Authentication authentication) {
-        Map<String, Object> claims = new HashMap<>();
         Long now = System.currentTimeMillis();
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("authorities", authentication.getAuthorities().stream()
-//                .setClaims(claims)
-                .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
-                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
+                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())  // Ensure the secret is converted to bytes
                 .compact();
     }
 
-    public Claims getClaimsFromJWT(String token) {
-        return Jwts.parser()
-                .setSigningKey(jwtConfig.getSecret().getBytes())
+    public String getUsernameFromJWT(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtConfig.getSecret().getBytes())  // Ensure the secret is converted to bytes
                 .parseClaimsJws(token)
                 .getBody();
-    }
 
+        return claims.getSubject();
+    }
 
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser()
-                    .setSigningKey(jwtConfig.getSecret().getBytes())
+                    .setSigningKey(jwtConfig.getSecret().getBytes())  // Ensure the secret is converted to bytes
                     .parseClaimsJws(authToken);
-
             return true;
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");
