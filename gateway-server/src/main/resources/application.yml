@@ -32,13 +32,13 @@ spring:
         - id: authentication-server
           uri: http://127.0.0.1:8090
           predicates:
-            - Path=/**
+            - Path=/authentication-server/**
 
         - id: chat-service
           uri: http://127.0.0.1:8092
           predicates:
             - Path=/**
-#            - Path=/ws/**
+            - Path=/ws/**
           filters:
             - AuthenticationFilter
 #          metadata:

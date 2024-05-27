@@ -35,7 +35,10 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/sign-up", "/sign-in", "/validate-token", "/get-token").permitAll()
+                        .requestMatchers("/authentication-server/sign-up",
+                                "/authentication-server/sign-in",
+                                "/authentication-server/validate-token",
+                                "/authentication-server/get-token").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

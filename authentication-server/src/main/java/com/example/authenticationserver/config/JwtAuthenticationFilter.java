@@ -25,6 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService customUserDetailsService;
 
+
     public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService customUserDetailsService) {
         this.jwtService = jwtService;
         this.customUserDetailsService = customUserDetailsService;
@@ -36,7 +37,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         log.info("worked filter");
         String path = request.getRequestURI();
-        if (path.startsWith("/sign-up") || path.startsWith("/sign-in") || path.startsWith("/validate-token") || path.startsWith("/get-token")) {
+        if (path.startsWith("/authentication-server/sign-up") ||
+                path.startsWith("/authentication-server/sign-in") ||
+                path.startsWith("/authentication-server/validate-token") ||
+                path.startsWith("/authentication-server/get-token")) {
             filterChain.doFilter(request, response);
             return;
         }

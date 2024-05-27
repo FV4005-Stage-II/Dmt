@@ -1,4 +1,4 @@
-const AUTH_SERVICE = "http://localhost:8080";
+const AUTH_SERVICE = "http://localhost:8080/authentication-server";
 
 
 
