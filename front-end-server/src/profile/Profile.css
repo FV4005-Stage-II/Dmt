@@ -1,11 +1,14 @@
+.main-content {
+  display: flex;
+}
+
 .profile-container {
   max-width: 420px;
-  margin: 0 auto;
-  margin: 0 auto;
+  margin-left: 20%; 
   margin-top: 40px;
-  /* border: 1px solid #e1e0e0;
-  background-color: #fff;
-  border-radius: 10px; */
+  /* padding-left: 220px; Учитывает ширину сайдбара */
+  display: block; /* Измените flex на block для нормального потока */
+  min-height: calc(100vh - 90px); /* Учитывает высоту хедера */
 }
 
 .user-avatar-circle {
@@ -20,4 +23,18 @@
 
 .ant-card-meta-description {
   font-size: 14px;
+}
+
+.profile-details-card {
+  width: 420px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 18px;
 }

@@ -1,18 +1,29 @@
-package com.example.authenticationserver.payload;
+package com.example.friendsservice.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+
 
 import java.time.LocalDate;
 
 @Data
-public class SignUpRequest {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserProfile {
+
+    @Id
+    private String id;
 
     @NotBlank
-    @Size(min = 3, max = 15)
+    @Size(max = 15)
     private String username;
 
     @NotBlank
@@ -20,9 +31,10 @@ public class SignUpRequest {
     @Email
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 20)
-    private String password;
+    private boolean active;
+
+    @Size(max = 255)
+    private String profilePictureUrl;
 
     @NotBlank
     @Size(max = 30)
@@ -33,7 +45,7 @@ public class SignUpRequest {
     private String lastName;
 
     @NotBlank
-    private String gender; // допустим "male" или "female"
+    private String gender;
 
     @NotNull
     private LocalDate dateOfBirth;

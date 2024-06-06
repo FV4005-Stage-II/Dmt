@@ -9,6 +9,7 @@ import com.example.authenticationserver.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +29,7 @@ public class AuthController {
     @PostMapping("/sign-up")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         log.info("sign-up");
-        return ResponseEntity.ok(authService.registerUser(signUpRequest));
+        return new ResponseEntity<>(authService.registerUser(signUpRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/sign-in")
@@ -46,7 +47,10 @@ public class AuthController {
     @GetMapping(value = "/get-self-id", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSelfId(@AuthenticationPrincipal CustomUserDetails userDetails) {
         log.info("get-self-id");
-        return ResponseEntity.ok(UserId.builder().userId(userDetails.getUserId()).build());
+        return ResponseEntity.ok(UserId.builder().id(userDetails.getId())
+                        .name(userDetails.getUsername())
+                        .profilePicture(userDetails.getProfilePictureUrl())
+                        .build());
     }
 
     @GetMapping(value = "/users/summaries", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -67,7 +71,7 @@ public class AuthController {
                 .id(user.getId())
                 .username(user.getUsername())
                 .name(user.getUsername())
-//                .profilePicture(user.getUserProfile().getProfilePictureUrl())
+                .profilePicture(user.getProfilePictureUrl())
                 .build();
     }
 }

@@ -6,31 +6,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CustomUserDetails implements UserDetails {
-
-    private String userId;
-    private String username;
-    private String password;
-
-    public CustomUserDetails(User userCredential) {
-        this.username = userCredential.getUsername();
-        this.password = userCredential.getPassword();
-        this.userId = userCredential.getId();
+public class CustomUserDetails extends User implements UserDetails {
+    public CustomUserDetails(final User user) {
+        super(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -53,7 +36,5 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
-    public String getUserId() {
-        return userId;
-    }
+
 }

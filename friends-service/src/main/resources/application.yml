@@ -1,0 +1,9 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: friends-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/friends

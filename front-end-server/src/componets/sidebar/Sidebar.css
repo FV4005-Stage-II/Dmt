@@ -1,0 +1,19 @@
+/* Sidebar.css */
+.sidebar {
+    width: 200px;
+    background: #fff;
+    /* position: fixed; */
+    height: 100%;
+    border-right: 1px solid #e1e0e0;
+    border-left: 1px solid #e1e0e0;
+    margin-left: 100px;
+    min-height: calc(100vh - 90px); /* Учитывает высоту хедера */
+    padding-top: 40px;
+    font-size: 18px;
+  }
+
+  
+.sidebar .ant-menu-item {
+    font-size: 18px; 
+  }
+  

@@ -8,6 +8,7 @@ import {
 // import {login} from "../../util/"
 import "./Signin.css";
 import { login } from "../api/AuthenticationApi";
+import Header from "../componets/header/Header";
 
 const SignIn = (props) => {
     const [loading, setLoading] = useState(false);
@@ -47,48 +48,52 @@ const SignIn = (props) => {
 
 
     return (
-      <div className="login-container">
-      {/* <DingtalkOutlined style={{ fontSize: 50 }} /> */}
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+      <div>
+        <Header/>
+        <div className="login-container">
+          
+        {/* <DingtalkOutlined style={{ fontSize: 50 }} /> */}
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
           >
-            <Input
-              size="large"
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
-          >
-            <Input
-              size="large"
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              shape="round"
-              size="large"
-              htmlType="submit"
-              className="login-form-button"
-              loading={loading}
+            <Form.Item
+              name="username"
+              rules={[{ required: true, message: "Пожалуйста, напишите своё имя пользовтеля" }]}
             >
-              Log in
-            </Button>
-          </Form.Item>
-          Not a member yet? <a href="/sign-up">Sign up</a>
-        </Form>
+              <Input
+                size="large"
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Имя пользователя"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: "Пожалуйста, напишите свой пароль!" }]}
+            >
+              <Input
+                size="large"
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Пароль"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                shape="round"
+                size="large"
+                htmlType="submit"
+                className="login-form-button"
+                loading={loading}
+              >
+                Log in
+              </Button>
+            </Form.Item>
+            Еще не зарегистрированы? <a href="/sign-up">Зарегистрироваться</a>
+          </Form>
+        </div>
       </div>
     );
 };

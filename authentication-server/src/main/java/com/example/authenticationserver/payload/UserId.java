@@ -6,5 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class UserId {
-    private String userId;
+    private String id;
+    private String username;
+    private String name;
+    private String profilePicture;
 }

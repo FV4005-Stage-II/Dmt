@@ -1,0 +1,15 @@
+/* Header.css */
+.header {
+    width: 100%;
+    height: 50px; /* Настройте высоту по необходимости */
+    background-color: #202020; /* Настройте цвет фона по необходимости */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-title {
+    color: #fff;
+    font-size: 20px; /* Настройте размер шрифта по необходимости */
+    margin: 0;
+  }

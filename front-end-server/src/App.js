@@ -6,6 +6,8 @@ import Profile from "./profile/Profile";
 import Chat from './chat/Chat';
 import SignIn from './sign-in/SignIn';
 import SignUp from './sign-up/SignUp';
+import Friends from './friends/Friends';
+import AnotherPage from './anotherPage/AnotherPage';
 import { RecoilRoot } from "recoil";
 
 
@@ -16,28 +18,13 @@ function App(props) {
       <RecoilRoot>
       <BrowserRouter>
         <Switch>
-
           <Route exact path="/profile" render={(props) => <Profile {...props} />} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/sign-in" render={(props) => <SignIn {...props} />} />
           <Route exact path="/sign-up" render={(props) => <SignUp {...props} />} />
           <Route exact path="/" render={(props) => <SignIn {...props} />} />
-
-          
-          
-          
-          
-          {/* <Route
-            exact
-            path="/login"
-            render={(props) => <Signin {...props} />}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={(props) => <Signup {...props} />}
-          />
-          <Route exact path="/chat" render={(props) => <Chat {...props} />} /> */}
+          <Route exact path="/friends" render={(props) => <Friends {...props} />} />
+          <Route exact  path="/profile/:id" render={(props) => <AnotherPage {...props} />} />
         </Switch>
       </BrowserRouter>
       </RecoilRoot>

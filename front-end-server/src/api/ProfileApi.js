@@ -1,4 +1,6 @@
 const AUTH_SERVICE = "http://localhost:8080/authentication-server";
+const MAIN_PAGE_SERVICE = "http://localhost:8080/main-page";
+
 
 
 
@@ -40,3 +42,16 @@ const request = (options) => {
       method: "GET",
     });
   }
+
+
+  export function getProfileUser(profileId) {
+    if (!localStorage.getItem("accessToken")) {
+      return Promise.reject("No access token set.");
+    }
+  
+    return request({
+      url: MAIN_PAGE_SERVICE + "/profiles/" + profileId,
+      method: "GET",
+    });
+  }
+

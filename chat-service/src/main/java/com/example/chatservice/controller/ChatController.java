@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @Slf4j
-public class ChatController {
+public class ChatController { // разделить мапинг запросов с сокетами /chat-api
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
@@ -38,7 +38,7 @@ public class ChatController {
                         saved.getSenderName()));
     }
 
-    @GetMapping("/messages/{senderId}/{recipientId}/count")
+    @GetMapping("/chat-api/messages/{senderId}/{recipientId}/count")
     public ResponseEntity<Long> countNewMessages(
             @PathVariable String senderId,
             @PathVariable String recipientId) {
@@ -47,7 +47,7 @@ public class ChatController {
                 .ok(chatMessageService.countNewMessages(senderId, recipientId));
     }
 
-    @GetMapping("/messages/{senderId}/{recipientId}")
+    @GetMapping("/chat-api/messages/{senderId}/{recipientId}")
     public ResponseEntity<?> findChatMessages ( @PathVariable String senderId,
                                                 @PathVariable String recipientId) {
         log.info("findChatMessages");
@@ -55,13 +55,13 @@ public class ChatController {
                 .ok(chatMessageService.findChatMessages(senderId, recipientId));
     }
 
-    @GetMapping("/messages/{id}")
+    @GetMapping("/chat-api/messages/{id}")
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
         log.info("findMessage");
         return ResponseEntity
                 .ok(chatMessageService.findById(id));
     }
-    @GetMapping("/test")
+    @GetMapping("/chat-api/test")
     public ResponseEntity<?> test () {
         log.info("test");
         return ResponseEntity

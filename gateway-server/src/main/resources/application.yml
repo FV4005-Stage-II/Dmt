@@ -22,6 +22,11 @@ spring:
               - Authorization
             allowCredentials: true
       routes:
+        - id: authentication-server
+          uri: http://127.0.0.1:8090
+          predicates:
+            - Path=/authentication-server/**
+
         - id: main-page-service
           uri: http://127.0.0.1:8091
           predicates:
@@ -29,18 +34,48 @@ spring:
           filters:
             - AuthenticationFilter
 
-        - id: authentication-server
-          uri: http://127.0.0.1:8090
+        - id: friends-service
+          uri: http://127.0.0.1:8093
           predicates:
-            - Path=/authentication-server/**
-
-        - id: chat-service
-          uri: http://127.0.0.1:8092
-          predicates:
-            - Path=/**
-            - Path=/ws/**
+            - Path=/friends-service/**
           filters:
             - AuthenticationFilter
+
+
+
+
+
+#        - id: chat-service
+#          uri: http://127.0.0.1:8092
+#          predicates:
+#            - Path=/chat-api/**
+#          filters:
+#            - AuthenticationFilter
+#
+#        - id: chat
+#          uri: http://127.0.0.1:8092
+#          predicates:
+#            - Path=/ws/info/**
+#
+#        - id: websocket-route
+#          uri: ws://127.0.0.1:8092
+#          predicates:
+#            - Path=/ws/**
+
+
+#        - id: chat
+#          uri: lb://127.0.0.1:8092
+#          predicates:
+#            - Path=/ws/info/**
+
+#          filters:
+#            - name: RewritePath
+#              args:
+#                regexp: /ws/(?<segment>.*)
+#                replacement: /ws/$\{segment}
+
+
+
 #          metadata:
 #            cors:
 #              allowedOrigins: '*'

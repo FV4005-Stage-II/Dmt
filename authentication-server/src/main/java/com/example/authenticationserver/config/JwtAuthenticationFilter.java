@@ -40,7 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (path.startsWith("/authentication-server/sign-up") ||
                 path.startsWith("/authentication-server/sign-in") ||
                 path.startsWith("/authentication-server/validate-token") ||
-                path.startsWith("/authentication-server/get-token")) {
+                path.startsWith("/authentication-server/get-token") ||
+                path.startsWith("/ws/")) {
             filterChain.doFilter(request, response);
             return;
         }

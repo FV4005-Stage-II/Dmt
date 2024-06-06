@@ -1,0 +1,136 @@
+.main-content {
+    display: flex;
+  }
+  
+  .friends-container {
+    flex-grow: 1;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friends-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px; /* Промежуток между колонками */
+  }
+  
+  .friends-column {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+  }
+  
+  .friends-column-my-friends {
+    background-color: #e3f2fd;
+  }
+  
+  .friends-column-friend-requests {
+    background-color: #fff3e0;
+  }
+  
+  .friends-column-search-friends {
+    background-color: #e8f5e9;
+  }
+  
+  .friends-column:hover {
+    transform: translateY(-5px);
+    border-color: black;
+  }
+  
+  .friends-column h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .friends-column ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .friends-column ul li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0f0f0;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: left;
+    transition: background 0.3s, transform 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+    overflow: hidden;
+  }
+  
+  .friends-column ul li:hover {
+    background: #e0e0e0;
+    transform: translateY(-3px);
+    border-color: black;
+  }
+  
+  .friends-column ul li .username {
+    font-weight: bold;
+    color: #333;
+    flex-grow: 1;
+  }
+  
+  .add-friend-button {
+    position: absolute;
+    right: -150px; /* Начальная позиция кнопки за пределами видимости */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: right 0.3s ease-in-out;
+  }
+  
+  .friends-column ul li:hover .add-friend-button {
+    right: 10px; /* Показать кнопку при наведении */
+  }
+  
+  .friend-request-buttons {
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s ease-in-out;
+  }
+  
+  .friends-column ul li:hover .friend-request-buttons {
+    opacity: 1;
+  }
+  
+  .accept-button {
+    background-color: #4caf50; /* Зеленый цвет */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .accept-button:hover {
+    background-color: #45a049; /* Темно-зеленый цвет при наведении */
+  }
+  
+  .decline-button {
+    background-color: #f44336; /* Красный цвет */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .decline-button:hover {
+    background-color: #e53935; /* Темно-красный цвет при наведении */
+  }
+  
